@@ -1,13 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace assignment2.Models
+namespace bank.Models
 {
     public class Login
     {
-        public String LoginID { get; set; }
-        public String PasswordHashed { get; set; }
-        public String CustomerID { get; set; }
+        [Required, StringLength(8)]
+        [Display(Name = "Login ID")]
+        public string LoginID { get; set; }
 
+        public int CustomerID { get; set; }
+        public virtual Customer Customer { get; set; }
+
+        [Required, StringLength(64)]
+        public string PasswordHash { get; set; }
     }
 }
