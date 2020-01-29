@@ -1,9 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <a href="/Logins"><input type="button" name="Login" value="Login" /></a>
-    <a href="/Logins/Create"><input type="button" name="Register" value="Register" /></a>
+<div>
+    <h1 class="display-4">National Wealth Bank of Australasia</h1>
+    
+    <div class="text-center">
+        <img src="~/img/bank.jpg" alt="bank" />
+    </div>
 </div>
+
+<hr />
+
+<p>
+    <a asp-controller="Login" asp-action="Login">Login </a>
+</p>
