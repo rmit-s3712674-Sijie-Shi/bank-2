@@ -25,11 +25,9 @@ namespace bank.Controllers
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
                 return View(new Login { LoginID = loginID });
             }
-
             // Login customer.
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
-
             return RedirectToAction("Index", "Customer");
         }
 

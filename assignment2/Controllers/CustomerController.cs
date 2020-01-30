@@ -25,11 +25,6 @@ namespace bank.Controllers
             // The Customer.Accounts property will be lazy loaded upon demand.
             var customer = await _context.Customers.FindAsync(CustomerID);
 
-            // OR
-            // Eager loading.
-            //var customer = await _context.Customers.Include(x => x.Accounts).
-            //    FirstOrDefaultAsync(x => x.CustomerID == _customerID);
-
             return View(customer);
         }
 
@@ -40,20 +35,15 @@ namespace bank.Controllers
         {
             var account = await _context.Accounts.FindAsync(id);
 
-            if(amount <= 0)
+            if (amount <= 0)
                 ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-            if(amount.HasMoreThanTwoDecimalPlaces())
+            if (amount.HasMoreThanTwoDecimalPlaces())
                 ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ViewBag.Amount = amount;
                 return View(account);
             }
-
-            // Note this code could be moved out of the controller, e.g., into the Model.
-            // example of updating RELATED data
-            // the balance is going up (a field in Account table) and a 
-            // Transaction row is getting inserted into the Transaction table (via a navigation property)
             account.Balance += amount;
             account.Transactions.Add(
                 new Transaction
@@ -73,7 +63,6 @@ namespace bank.Controllers
         public async Task<IActionResult> Withdraw(int id, decimal amount)
         {
             var account = await _context.Accounts.FindAsync(id);
-
             if (amount <= 0)
                 ModelState.AddModelError(nameof(amount), "Amount must be positive.");
             if (amount.HasMoreThanTwoDecimalPlaces())
@@ -83,29 +72,56 @@ namespace bank.Controllers
                 ViewBag.Amount = amount;
                 return View(account);
             }
-
+            if (account.Balance < amount)
+            {
+                ModelState.AddModelError(nameof(amount), "Insufficient balance.");
+            }
             account.Balance = account.Balance - amount;
             account.Transactions.Add(
                 new Transaction
                 {
-                    TransactionType = TransactionType.Deposit,
+                    TransactionType = TransactionType.Withdraw,
                     Amount = amount,
                     TransactionTimeUtc = DateTime.UtcNow
                 });
-
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> WTransfer1to2(int id) => View(await _context.Accounts.FindAsync(id));
-        public async Task<IActionResult> Transfer1to2()
+
+        public async Task<IActionResult> Transfer1to2(int id, int AccountNumber, decimal amount, string Commment)
         {
-            return View("Transfer1to2");
+            var account = await _context.Accounts.FindAsync(id);
+            if (amount <= 0)
+                ModelState.AddModelError(nameof(amount), "Amount must be positive.");
+            if (amount.HasMoreThanTwoDecimalPlaces())
+                ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Amount = amount;
+                return View(account);
+            }
+            if (account.Balance < amount)
+            {
+                ModelState.AddModelError(nameof(amount), "Insufficient balance.");
+            }
+            account.Balance = account.Balance - amount;
+            account.Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.Transfer,
+                    Amount = amount,
+                    DestinationAccountNumber = AccountNumber,
+                    Comment = Commment,
+                    TransactionTimeUtc = DateTime.UtcNow
+                }); 
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> BillPay(int id) => View(await _context.Accounts.FindAsync(id));
-        public async Task<IActionResult> BillPay()
-        {
-            return View("BillPay");
+        public async Task<IActionResult> MyProfile (int id) => View(await _context.Accounts.FindAsync(id));
+        public async Task<IActionResult> MyProfile(int id, int AccountNumber, decimal amount, string Date) {
+            var account = await _context.Accounts.FindAsync(id);
+            return View(account);
         }
     }
 }
