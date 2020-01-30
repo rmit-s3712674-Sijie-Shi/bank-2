@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\作业\\暑期课程\\assignme\\assignment2\\bank\\bank.csproj": {}
+    "C:\\Users\\qinqi\\OneDrive\\桌面\\bank\\bank.csproj": {}
   },
   "projects": {
-    "D:\\作业\\暑期课程\\assignme\\assignment2\\bank\\bank.csproj": {
+    "C:\\Users\\qinqi\\OneDrive\\桌面\\bank\\bank.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\作业\\暑期课程\\assignme\\assignment2\\bank\\bank.csproj",
+        "projectUniqueName": "C:\\Users\\qinqi\\OneDrive\\桌面\\bank\\bank.csproj",
         "projectName": "bank",
-        "projectPath": "D:\\作业\\暑期课程\\assignme\\assignment2\\bank\\bank.csproj",
-        "packagesPath": "C:\\Users\\qinqing\\.nuget\\packages\\",
-        "outputPath": "D:\\作业\\暑期课程\\assignme\\assignment2\\bank\\obj\\",
+        "projectPath": "C:\\Users\\qinqi\\OneDrive\\桌面\\bank\\bank.csproj",
+        "packagesPath": "C:\\Users\\qinqi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\qinqi\\OneDrive\\桌面\\bank\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\qinqing\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\qinqi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -49,6 +49,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
