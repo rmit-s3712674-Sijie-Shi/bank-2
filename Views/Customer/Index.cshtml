@@ -1,0 +1,91 @@
+﻿@model Customer
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+    <div>
+        <h1 class="display-4">Welcome, @Model.Name</h1>
+        <a class="btn btn-primary"
+        asp-controller="Customers"   asp-action="Index" asp-route-id="@Model.CustomerID">Edit profile</a>
+        <h3>Your Accounts</h3>
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
+                <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
+                <th>@Html.DisplayNameFor(x => x.Accounts[0].Balance)</th>
+                <th></th>
+            </tr>
+            @foreach (var account in Model.Accounts)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+                    <td>@Html.DisplayFor(x => account.AccountType)</td>
+                    <td>@Html.DisplayFor(x => account.Balance)</td>
+
+                    <td>
+                        <a class="btn btn-primary"
+                           asp-action="Deposit" asp-route-id="@account.AccountNumber">Deposit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary"
+                           asp-action="Withdraw" asp-route-id="@account.AccountNumber">Withdraw</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary"
+                           asp-action="Transfer1to2" asp-route-id="@account.AccountNumber">Transfer</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary"
+                           asp-action="BillPay" asp-route-id="@account.AccountNumber"> BillPay</a>
+                    </td>
+                </tr>
+            }
+            <
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PostCode)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.CustomerID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.PostCode)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.CustomerID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.CustomerID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.CustomerID">Delete</a>
+            </td>
+        </table>
+    </div>
