@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using bank.Data;
+using NorthwindWithPagingExample.Data;
 
-namespace bank
+namespace NorthwindWithPagingExample
 {
     public class Startup
     {
@@ -17,13 +17,8 @@ namespace bank
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<bankContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString(nameof(bankContext)));
-
-                // Enable lazy loading.
-                options.UseLazyLoadingProxies();
-            });
+            services.AddDbContext<NorthwindContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString(nameof(NorthwindContext))));
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
@@ -36,6 +31,7 @@ namespace bank
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // ReSharper disable once UnusedMember.Global
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if(env.IsDevelopment())
@@ -54,10 +50,7 @@ namespace bank
             app.UseRouting();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
         }
     }
 }
