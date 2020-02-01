@@ -30,6 +30,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\CRUD\" />
+  </ItemGroup>
+
 
 
 </Project>
