@@ -15,15 +15,16 @@ namespace bank.Models
         public string Period { get; set; }
         
         public int AccountNumber { get; set; }
+        public virtual Account Account { get; set; }
 
         public int PayeeID { get; set; }
-
+               
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
 
         public DateTime ScheduleDate { get; set; }
 
-        public DateTime TransactionTimeUtc { get; set; }
+        public DateTime BillPayTimeUtc { get; set; }
 
 
     }
