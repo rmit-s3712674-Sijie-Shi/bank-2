@@ -27,35 +27,6 @@ namespace bank.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerID == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
-        }
-        // Create new customers
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerID,Name,Address,City,PostCode")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customer);
-        }
-
         // Edit customers' details
         public async Task<IActionResult> Edit(int? id)
         {
@@ -98,7 +69,7 @@ namespace bank.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit");
             }
             return View(customer);
         }

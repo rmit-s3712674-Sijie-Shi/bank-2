@@ -8,6 +8,7 @@ using bank.Utilities;
 using bankWithLogin.Attributes;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace bank.Controllers
@@ -31,7 +32,9 @@ namespace bank.Controllers
         public async Task<IActionResult> TransactionDisplay()
         {
             var customer = await _context.Customers.FindAsync(CustomerID);
-            return View("TransactionDisplay");
+            var pagedList = await _context.Accounts.Where(x => x.CustomerID == customer.CustomerID).
+                ToPagedListAsync(1, 4);
+            return View(pagedList);
         }
         public async Task<IActionResult> BillPayDisplay(int id) => View(await _context.Accounts.FindAsync(id));
         [HttpPost]
