@@ -1,0 +1,39 @@
+﻿@model Account
+
+    <h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Transfer1to2">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <p>Please enter the transfer amount</p>
+                <div class="form-group">
+                    <label for="Amount" class="control-label"></label>
+                    <input id="Amount" name="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
+                           data-val="true" data-val-number="The field Amount must be a number."
+                           data-val-required="The Amount field is required." />
+                    @Html.ValidationMessage("Amount", new { @class = "text-danger" })
+                </div>
+                <p>Please enter the transfer number</p>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="AccountNumber" class="control-label"></label>
+                        <input id="AccountNumber" name="AccountNumber" class="form-control" value="@ViewBag.AccountNumber?.ToString()"
+                               data-val="true" data-val-number="The field AccountNumber must be a number."
+                               data-val-required="The Amount field is required." />
+                        @Html.ValidationMessage("AccountNumber", new { @class = "text-danger" })
+                    </div>
+                    <p>Please enter a comment</p>
+                    <div class="form-group">
+                        <label for="Commment" class="control-label"></label>
+                        <input id="Commment" name="Commment" class="form-control" value="@ViewBag.Commment?.ToString()"
+                               @Html.ValidationMessage("Commment", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Deposit" class="btn btn-primary" />
+                    </div>
+                    </form>
+        </div>
+    </div>    
+<div>
+    <a asp-controller="Customer" asp-action="Index">Back to Accounts</a>
+</div>

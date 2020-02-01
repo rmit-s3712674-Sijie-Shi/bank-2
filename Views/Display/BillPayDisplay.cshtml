@@ -1,0 +1,39 @@
+﻿@model Account
+
+<h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BillPayDisplay">
+            <h3>Your BillPay</h3>
+            <table class="table">
+                <tr>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].BillPayID)</th>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].Period)</th>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].AccountNumber)</th>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].PayeeID)</th>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].Amount)</th>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].ScheduleDate)</th>
+                    <th>@Html.DisplayNameFor(x => x.BillPay[0].BillPayTimeUtc)</th>
+                    <th></th>
+                </tr>
+                @foreach (var billp in Model.BillPay)
+                {
+                    <tr>
+                    <td> @Html.DisplayFor(x => billp.BillPayID) </td >
+                    <td> @Html.DisplayFor(x => billp.Period) </td >
+                    <td> @Html.DisplayFor(x => billp.AccountNumber) </td >
+                    <td> @Html.DisplayFor(x => billp.BillPayID) </td >
+                    <td> @Html.DisplayFor(x => billp.Amount) </td >
+                    <td> @Html.DisplayFor(x => billp.ScheduleDate) </td >
+                    <td> @Html.DisplayFor(x => billp.BillPayTimeUtc) </td >
+                    </tr>
+                }
+</form>
+    </div>
+</div>
+<div>
+    <a asp-controller="BillPays" asp-action="Index">Edit bill pay</a>
+</div>
+<div>
+    <a asp-controller="Customer" asp-action="Index">Back to Accounts</a>
+</div>

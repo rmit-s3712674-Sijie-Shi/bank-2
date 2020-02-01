@@ -5,8 +5,7 @@
 
     <div>
         <h1 class="display-4">Welcome, @Model.Name</h1>
-        <a class="btn btn-primary"
-        asp-controller="Customers"   asp-action="Index" asp-route-id="@Model.CustomerID">Edit profile</a>
+       
         <h3>Your Accounts</h3>
         <table class="table">
             <tr>
@@ -17,30 +16,38 @@
             </tr>
             @foreach (var account in Model.Accounts)
             {
-                <tr>
-                    <td>@Html.DisplayFor(x => account.AccountNumber)</td>
-                    <td>@Html.DisplayFor(x => account.AccountType)</td>
-                    <td>@Html.DisplayFor(x => account.Balance)</td>
+        <tr>
+            <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+            <td>@Html.DisplayFor(x => account.AccountType)</td>
+            <td>@Html.DisplayFor(x => account.Balance)</td>
 
-                    <td>
-                        <a class="btn btn-primary"
-                           asp-action="Deposit" asp-route-id="@account.AccountNumber">Deposit</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary"
-                           asp-action="Withdraw" asp-route-id="@account.AccountNumber">Withdraw</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary"
-                           asp-action="Transfer1to2" asp-route-id="@account.AccountNumber">Transfer</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary"
-                           asp-action="BillPay" asp-route-id="@account.AccountNumber"> BillPay</a>
-                    </td>
-                </tr>
+            <td>
+                <a class="btn btn-primary"
+                  asp-controller="Account" asp-action="Deposit" asp-route-id="@account.AccountNumber">Deposit</a>
+            </td>
+            <td>
+                <a class="btn btn-primary"
+                  asp-controller="Account" asp-action="Withdraw" asp-route-id="@account.AccountNumber">Withdraw</a>
+            </td>
+            <td>
+                <a class="btn btn-primary"
+                  asp-controller="Account" asp-action="Transfer1to2" asp-route-id="@account.AccountNumber">Transfer</a>
+            </td>
+            <td>
+                <a class="btn btn-primary"
+                  asp-controller="Account"  asp-action="BillPay" asp-route-id="@account.AccountNumber"> BillPay</a>
+            </td>
+            <td>
+                <a class="btn btn-primary"
+                   asp-controller="Display" asp-action="TransactionDisplay" asp-route-id="@account.AccountNumber">View Transaction</a>
+            </td>
+            <td>
+                <a class="btn btn-primary"
+                  asp-controller="Display"  asp-action="BillPayDisplay" asp-route-id="@account.AccountNumber">View BillPay</a>
+            </td>            
+        </tr>
             }
-            <
+
             <table class="table">
                 <thead>
                     <tr>
@@ -83,9 +90,9 @@
                 </tbody>
             </table>
             <td>
-                <a asp-action="Edit" asp-route-id="@Model.CustomerID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Model.CustomerID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Model.CustomerID">Delete</a>
+                <a asp-controller="CRUD"  asp-action="Edit" asp-route-id="@Model.CustomerID">Edit</a> |
+                <a asp-controller="CRUD" asp-action="Details" asp-route-id="@Model.CustomerID">Details</a> |
+                <a asp-controller="CRUD" asp-action="Delete" asp-route-id="@Model.CustomerID">Delete</a>
             </td>
         </table>
     </div>

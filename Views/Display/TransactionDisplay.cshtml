@@ -1,0 +1,37 @@
+﻿@model Account
+
+<h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="TransactionsDisplay">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h3>Your Transactions</h3>
+            <table class="table">
+                <tr>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccountNumber)</th>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].Comment)</th>
+                    <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionTimeUtc)</th>
+                    <th></th>
+                </tr>
+                @foreach (var tra in Model.Transactions)
+                {
+            <tr>
+                <td>@Html.DisplayFor(x => tra.TransactionID)</td>
+                <td>@Html.DisplayFor(x => tra.TransactionType)</td>
+                <td>@Html.DisplayFor(x => tra.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => tra.DestinationAccountNumber)</td>
+                <td>@Html.DisplayFor(x => tra.Amount)</td>
+                <td>@Html.DisplayFor(x => tra.Comment)</td>
+                <td>@Html.DisplayFor(x => tra.TransactionTimeUtc)</td>
+            </tr>
+                }
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-controller="Customer" asp-action="Index">Back to Accounts</a>
+</div>
