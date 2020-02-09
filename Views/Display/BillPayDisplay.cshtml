@@ -9,7 +9,6 @@
                 <tr>
                     <th>@Html.DisplayNameFor(x => x.BillPay[0].BillPayID)</th>
                     <th>@Html.DisplayNameFor(x => x.BillPay[0].Period)</th>
-                    <th>@Html.DisplayNameFor(x => x.BillPay[0].AccountNumber)</th>
                     <th>@Html.DisplayNameFor(x => x.BillPay[0].PayeeID)</th>
                     <th>@Html.DisplayNameFor(x => x.BillPay[0].Amount)</th>
                     <th>@Html.DisplayNameFor(x => x.BillPay[0].ScheduleDate)</th>
@@ -21,8 +20,7 @@
                     <tr>
                     <td> @Html.DisplayFor(x => billp.BillPayID) </td >
                     <td> @Html.DisplayFor(x => billp.Period) </td >
-                    <td> @Html.DisplayFor(x => billp.AccountNumber) </td >
-                    <td> @Html.DisplayFor(x => billp.BillPayID) </td >
+                    <td> @Html.DisplayFor(x => billp.PayeeID) </td >
                     <td> @Html.DisplayFor(x => billp.Amount) </td >
                     <td> @Html.DisplayFor(x => billp.ScheduleDate) </td >
                     <td> @Html.DisplayFor(x => billp.BillPayTimeUtc) </td >
