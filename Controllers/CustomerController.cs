@@ -27,6 +27,14 @@ namespace bank.Controllers
             
             return View(customer);
         }
+        public async Task<IActionResult> IndexLock()
+        {
+            // Lazy loading.
+            var customer = await _context.Customers.FindAsync(CustomerID);
+            return View(customer);
+        }
+
+        
         // Check customer exist
         private bool CustomerExists(int id)
         {
